@@ -8,7 +8,7 @@ predicted.nn_ <- predicted.nn$net.result
 
 #Support Vector Machine
 library(e1071)
-f <- as.formula(`Next Close` ~ Open*High*Low*Close)
+f <- as.formula(`Next Close` ~ Open + High + Low + Close)
 svm_ <- svm(f, train_)
 predictedtraining <- predict(svm_, train_)
 predictedtest <- predict(svm_, test_)
@@ -19,7 +19,7 @@ predictedtest2 <- predict(bestfit, test_)
 #Sentiment Analysis
 library(randomForest)
 library(e1071)
-formula <- as.formula(`Next Close` ~ score*Close)
+formula <- as.formula(`Next Close` ~ score + Close)
 sa_ <- randomForest(formula, train_)
 predicted <- predict(sa_, test_)
 bestpredicted <- tuneRF(test_, predicted, doBest = TRUE)
@@ -35,7 +35,7 @@ predicted.nn_ <- predicted.nn$net.result
 
 #Support Vector Machine - Sentiment Analysis
 library(e1071)
-f <- as.formula(`Next Close` ~ Open*High*Low*Close*Score)
+f <- as.formula(`Next Close` ~ Open + High + Low + Close + Score)
 svm_ <- svm(f, train_)
 predictedtraining <- predict(svm_, train_)
 predictedtest <- predict(svm_, test_)
